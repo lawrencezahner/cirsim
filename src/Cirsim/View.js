@@ -194,10 +194,22 @@ export const View = function(main, canvas, circuit) {
             this.draw();
         }
 
+        let keyboardListener = (event) => {
+            if (event.ctrlKey) {
+                if (event.which == 67) {
+                    alert('CTRL + C was pressed');
+                }
+
+                if (event.which == 86) {
+                    alert('CTRL + V was pressed');
+                }
+            }
+        }
+
         // Install mouse handlers
         canvas.addEventListener('mousedown', mouseDownListener);
         canvas.addEventListener('dblclick', mouseDblClickListener);
-
+        
         let body = document.querySelector('body');
         body.addEventListener('mouseup', mouseUpListener);
 
@@ -205,6 +217,10 @@ export const View = function(main, canvas, circuit) {
         canvas.addEventListener('touchstart', touchStartListener);
         canvas.addEventListener('touchend', touchEndListener);
         canvas.addEventListener('touchcancel', touchCancelListener);
+
+        // Install keyboard handler
+        // Have to use window to capture key events?
+        window.addEventListener('keyup', keyboardListener);
     }
 
     this.draw = function() {
