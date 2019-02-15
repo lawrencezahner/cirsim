@@ -165,6 +165,7 @@ export const Selection = function(view) {
 
     };
 
+    // Copys selected components to the clipboard
     this.copy = function() {
         this.clipboard = [];
         for (let i = 0; i < this.selection.length; i++) {
@@ -173,15 +174,27 @@ export const Selection = function(view) {
         }
     }
 
+    // Pastes components from the clipboard into the current view
     this.paste = function() {
         this.selection = [];
         for (let i = 0; i < this.clipboard.length; i++) {
             var component = this.clipboard[i];
+
+            // Create a new instance of the copied component by calling its constructor
             var newComponent = new component.constructor();
+
+            // Assign the new component a unique id
             newComponent.brand();
+
+            // Move the new component 50 units away from the original component
+            // in both directions
             newComponent.x = component.x + 50;
             newComponent.y = component.y + 50;
+
+            // Add the new component to the selection
             this.selection.push(newComponent);
+
+            // Add the new component to the current view's circuit
             view.circuit.add(newComponent);
         }
     }

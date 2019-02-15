@@ -196,11 +196,11 @@ export const View = function(main, canvas, circuit) {
 
         let keyboardListener = (event) => {
             if (event.ctrlKey) {
-                if (event.which == 67) {
+                if (event.which == 67) { // CTRL + C was pressed
                     this.selection.copy();
                 }
 
-                if (event.which == 86) {
+                if (event.which == 86) { // CTRL + V was pressed
                     this.selection.paste();
                     this.draw();
                 }
@@ -221,6 +221,7 @@ export const View = function(main, canvas, circuit) {
 
         // Install keyboard handler
         // Have to use window to capture key events?
+        // Might want to use body like the mouseup listener
         window.addEventListener('keyup', keyboardListener);
     }
 
