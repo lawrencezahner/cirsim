@@ -169,23 +169,21 @@ export const Selection = function(view) {
         this.clipboard = [];
         for (let i = 0; i < this.selection.length; i++) {
             var component = this.selection[i];
-            var newComponent = new component.constructor();
-            newComponent.brand();
-            newComponent.x = component.x + 50;
-            newComponent.y = component.y + 50;
-            this.clipboard.push(newComponent);
+            this.clipboard.push(component);
         }
     }
 
     this.paste = function() {
+        this.selection = [];
         for (let i = 0; i < this.clipboard.length; i++) {
             var component = this.clipboard[i];
-            view.circuit.add(component);
+            var newComponent = new component.constructor();
+            newComponent.brand();
+            newComponent.x = component.x + 50;
+            newComponent.y = component.y + 50;
+            this.selection.push(newComponent);
+            view.circuit.add(newComponent);
         }
-
-        console.log(view.circuit.components);
-
-        this.selection = this.clipboard;
     }
 
     this.getSelection = function() {
