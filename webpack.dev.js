@@ -14,16 +14,15 @@ module.exports = merge(common, {
         publicPath: ''
     },
     devServer: {
-        host: 'localhost',
-        port: 8080
-        // proxy: [{
-        //         context: ['/api-demo/'],
-        //         target: 'http://cirsim.localhost',
-        //         secure: false,
-        //         changeOrigin: false,
-        //         cookieDomainRewrite: "http://cirsim.localhost",
-        //         headers: {origin: 'http://cirsim.localhost'}
-        // }]
+        host: 'cirsim.localhost',
+        proxy: [{
+                context: ['/api-demo/'],
+                target: 'http://cirsim.localhost',
+                secure: false,
+                changeOrigin: false,
+                cookieDomainRewrite: "http://cirsim.localhost",
+                headers: {origin: 'http://cirsim.localhost'}
+        }]
 
     }
 });
