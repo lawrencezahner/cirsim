@@ -197,11 +197,12 @@ export const View = function(main, canvas, circuit) {
         let keyboardListener = (event) => {
             if (event.ctrlKey) {
                 if (event.which == 67) {
-                    alert('CTRL + C was pressed');
+                    this.selection.copy();
                 }
 
                 if (event.which == 86) {
-                    alert('CTRL + V was pressed');
+                    this.selection.paste();
+                    this.draw();
                 }
             }
         }

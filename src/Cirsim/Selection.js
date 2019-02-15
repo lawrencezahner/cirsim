@@ -12,6 +12,7 @@ export const Selection = function(view) {
 
     /// Maintains a list of the currently selected components
     this.selection = [];
+    this.clipboard = [];
 
     var down = false;
     var firstMove = false;
@@ -164,12 +165,36 @@ export const Selection = function(view) {
 
     };
 
+    this.copy = function() {
+        this.clipboard = [];
+        for (let i = 0; i < this.selection.length; i++) {
+            var component = this.selection[i];
+            var newComponent = new component.constructor();
+            newComponent.brand();
+            newComponent.x = component.x + 50;
+            newComponent.y = component.y + 50;
+            this.clipboard.push(newComponent);
+        }
+    }
+
+    this.paste = function() {
+        for (let i = 0; i < this.clipboard.length; i++) {
+            var component = this.clipboard[i];
+            view.circuit.add(component);
+        }
+
+        console.log(view.circuit.components);
+
+        this.selection = this.clipboard;
+    }
+
     this.getSelection = function() {
         return this.selection;
     };
 
     this.clear = function() {
         this.selection = [];
+        this.clipboard = [];
     }
 };
 
